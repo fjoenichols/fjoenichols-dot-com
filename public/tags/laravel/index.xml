@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Laravel on F. Joe Nichols</title>
+    <link>http://localhost:1313/tags/laravel/</link>
+    <description>Recent content in Laravel on F. Joe Nichols</description>
+    <generator>Hugo -- 0.151.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Jan 2026 15:30:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 1: Scoping a Multi-Tenant CMS</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-01/</link>
+      <pubDate>Sat, 10 Jan 2026 15:30:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-01/</guid>
+      <description>&lt;h2 id=&#34;phase-1-prep-day-day-1&#34;&gt;Phase 1: Prep Day (Day 1)&lt;/h2&gt;
+&lt;h3 id=&#34;1-pick-your-poison&#34;&gt;1. Pick your poison&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Learning Laravel.&lt;/strong&gt; I haven&amp;rsquo;t actively used php on purpose for anything since Late php 4/Early php 5. I want to jump back in and refresh my php skills so I plan to do so by learning the Laravel framework.&lt;/p&gt;
+&lt;h3 id=&#34;2-define-the-essence&#34;&gt;2. Define the essence&lt;/h3&gt;
+&lt;p&gt;To build a functional multi-tenant system, I need to focus on these sub-skills:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Authentication &amp;amp; Profile&lt;/strong&gt;: Implementing secure login (Laravel Breeze) so users can manage their own accounts.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CRUD&lt;/strong&gt;: Allowing users to Create, Read, Update, and Delete content.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Ownership&lt;/strong&gt;: Creating data relationships to ensure content is isolated to the correct customer.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Site Routing&lt;/strong&gt;: Learning how Laravel handles subdomains and maps custom external domains to specific customer data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-name-the-prize&#34;&gt;3. Name the prize&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;The Goal&lt;/strong&gt;: A working Multi-Tenant CMS.
+A user should be able to sign up, get a dedicated subdomain or path, pick a theme, and manage their own unique set of posts/pages without seeing anyone else&amp;rsquo;s data.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

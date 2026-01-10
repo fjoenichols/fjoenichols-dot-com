@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Learning on F. Joe Nichols</title>
+    <link>http://localhost:1313/tags/learning/</link>
+    <description>Recent content in Learning on F. Joe Nichols</description>
+    <generator>Hugo -- 0.151.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Jan 2026 14:30:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The 21-Day Sprint: A Framework for Functional Fluency</title>
+      <link>http://localhost:1313/posts/what-is-a-21-day-sprint/</link>
+      <pubDate>Sat, 10 Jan 2026 14:30:00 -0700</pubDate>
+      <guid>http://localhost:1313/posts/what-is-a-21-day-sprint/</guid>
+      <description>&lt;h2 id=&#34;the-inspiration&#34;&gt;The Inspiration&lt;/h2&gt;
+&lt;p&gt;In the book &lt;a href=&#34;https://first20hours.com/&#34;&gt;The First 20 Hours&lt;/a&gt;, Josh Kaufman argues that the 10000 hour rule only applies to becoming a world class expert and about 20 hours is all that is needed to become &amp;ldquo;good enough&amp;rdquo; at most hobbies or professional skills.&lt;/p&gt;
+&lt;h2 id=&#34;why-21-days&#34;&gt;Why 21 Days?&lt;/h2&gt;
+&lt;p&gt;The goal of any sprint shouldn&amp;rsquo;t be mastery. It should be &lt;strong&gt;functional fluency&lt;/strong&gt;. Becoming good enough to use the new skill to create something and overcome barriers that may come up along the way.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

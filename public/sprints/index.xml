@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Sprints on F. Joe Nichols</title>
+    <link>http://localhost:1313/sprints/</link>
+    <description>Recent content in Sprints on F. Joe Nichols</description>
+    <generator>Hugo -- 0.151.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Jan 2026 15:30:00 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/sprints/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning Laravel</title>
+      <link>http://localhost:1313/sprints/learning-laravel/</link>
+      <pubDate>Sat, 10 Jan 2026 15:30:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/</guid>
+      <description>My 21-day journey to build a multi-tenant website generator using Laravel.</description>
+    </item>
+  </channel>
+</rss>

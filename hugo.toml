@@ -1,0 +1,66 @@
+baseURL = 'https://fjoenichols.com/'
+languageCode = 'en-us'
+title = 'F. Joe Nichols'
+theme = ["PaperMod"]
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNoStart = 1
+    lineNos = true
+    style = "dracula"
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+        unsafe = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
+  sprint = "sprints"
+
+[params.profileMode]
+    enabled = true
+    title = "F. Joe Nichols"
+    subtitle = "21-day sprints to reach functional fluency. <br>Currently: **Building a multi-tenant SSG in Laravel**"
+    imageUrl = "images/profile.jpg"
+    imageWidth = 150
+    imageHeight = 150
+    imageDisplay = "rounded"
+
+    [[params.profileMode.buttons]]
+        name = "Current Sprint"
+        url = "/sprints/learning-laravel/"
+
+    [[params.profileMode.buttons]]
+        name = "Knowledge Log"
+        url = "/categories/knowledge-log"
+    
+[[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/fjoenichols"
+[[params.socialIcons]]
+    name = "youtube"
+    url = "https://www.youtube.com/@fjoenichols"
+[[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/fjoenichols/"
+
+[[menu.main]]
+    identifier = "current"
+    name = "Current Sprint"
+    url = "/sprints/learning-laravel/"
+    weight = 5
+
+[[menu.main]]
+    identifier = "sprints"
+    name = "21-Day Sprints"
+    url = "/categories/21-day-sprints"
+    weight = 10
+
+[[menu.main]]
+    identifier = "log"
+    name = "Knowledge Log"
+    url = "/categories/knowledge-log"
+    weight = 20
