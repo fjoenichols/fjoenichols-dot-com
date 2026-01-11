@@ -5,6 +5,8 @@ categories = ["Knowledge Log", "21 Day Sprints"]
 tags = ["methodology", "learning", "productivity"]
 +++
 
+{{< youtube 0sUj6aGSoVs >}}
+
 ## The Inspiration
 In the book [The First 20 Hours](https://first20hours.com/), Josh Kaufman argues that the 10000 hour rule only applies to becoming a world class expert and about 20 hours is all that is needed to become "good enough" at most hobbies or professional skills.
 

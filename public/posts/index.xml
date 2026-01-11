@@ -13,7 +13,11 @@
       <link>http://localhost:1313/posts/what-is-a-21-day-sprint/</link>
       <pubDate>Sat, 10 Jan 2026 14:30:00 -0700</pubDate>
       <guid>http://localhost:1313/posts/what-is-a-21-day-sprint/</guid>
-      <description>&lt;h2 id=&#34;the-inspiration&#34;&gt;The Inspiration&lt;/h2&gt;
+      <description>&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/0sUj6aGSoVs?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+
+&lt;h2 id=&#34;the-inspiration&#34;&gt;The Inspiration&lt;/h2&gt;
 &lt;p&gt;In the book &lt;a href=&#34;https://first20hours.com/&#34;&gt;The First 20 Hours&lt;/a&gt;, Josh Kaufman argues that the 10000 hour rule only applies to becoming a world class expert and about 20 hours is all that is needed to become &amp;ldquo;good enough&amp;rdquo; at most hobbies or professional skills.&lt;/p&gt;
 &lt;h2 id=&#34;why-21-days&#34;&gt;Why 21 Days?&lt;/h2&gt;
 &lt;p&gt;The goal of any sprint shouldn&amp;rsquo;t be mastery. It should be &lt;strong&gt;functional fluency&lt;/strong&gt;. Becoming good enough to use the new skill to create something and overcome barriers that may come up along the way.&lt;/p&gt;</description>
@@ -27,7 +31,7 @@
 &lt;p&gt;To get a site up quickly I am going to Hugo&lt;/p&gt;
 &lt;h2 id=&#34;installing-hugo-for-local-development&#34;&gt;Installing Hugo for Local Development&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;[!NOTE]
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;
 The instructions provided in this document will be for Ubuntu 24.04.
 Installation instructions for other operating systems are available &lt;a href=&#34;https://gohugo.io/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;Following best practices of not testing in production, I will be setting up a local development environment for my Hugo site. Step-by-step instructions are provided below.&lt;/p&gt;</description>

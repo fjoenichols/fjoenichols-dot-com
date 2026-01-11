@@ -8,6 +8,8 @@ tags = ["laravel", "php", "tech"]
 
 ## Phase 1: Prep Day (Day 1)
 
+{{< youtube c-EKAltRAh4 >}}
+
 ### 1. Pick your poison
 **Learning Laravel.** I haven't actively used php on purpose for anything since Late php 4/Early php 5. I want to jump back in and refresh my php skills so I plan to do so by learning the Laravel framework.
 

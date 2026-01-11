@@ -14,19 +14,12 @@
       <pubDate>Sat, 10 Jan 2026 15:30:00 -0700</pubDate>
       <guid>http://localhost:1313/sprints/learning-laravel/day-01/</guid>
       <description>&lt;h2 id=&#34;phase-1-prep-day-day-1&#34;&gt;Phase 1: Prep Day (Day 1)&lt;/h2&gt;
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/c-EKAltRAh4?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+
 &lt;h3 id=&#34;1-pick-your-poison&#34;&gt;1. Pick your poison&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Learning Laravel.&lt;/strong&gt; I haven&amp;rsquo;t actively used php on purpose for anything since Late php 4/Early php 5. I want to jump back in and refresh my php skills so I plan to do so by learning the Laravel framework.&lt;/p&gt;
-&lt;h3 id=&#34;2-define-the-essence&#34;&gt;2. Define the essence&lt;/h3&gt;
-&lt;p&gt;To build a functional multi-tenant system, I need to focus on these sub-skills:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Authentication &amp;amp; Profile&lt;/strong&gt;: Implementing secure login (Laravel Breeze) so users can manage their own accounts.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CRUD&lt;/strong&gt;: Allowing users to Create, Read, Update, and Delete content.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data Ownership&lt;/strong&gt;: Creating data relationships to ensure content is isolated to the correct customer.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multi-Site Routing&lt;/strong&gt;: Learning how Laravel handles subdomains and maps custom external domains to specific customer data.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-name-the-prize&#34;&gt;3. Name the prize&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;The Goal&lt;/strong&gt;: A working Multi-Tenant CMS.
-A user should be able to sign up, get a dedicated subdomain or path, pick a theme, and manage their own unique set of posts/pages without seeing anyone else&amp;rsquo;s data.&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;Learning Laravel.&lt;/strong&gt; I haven&amp;rsquo;t actively used php on purpose for anything since Late php 4/Early php 5. I want to jump back in and refresh my php skills so I plan to do so by learning the Laravel framework.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hugo Blog Setup</title>
@@ -37,7 +30,7 @@ A user should be able to sign up, get a dedicated subdomain or path, pick a them
 &lt;p&gt;To get a site up quickly I am going to Hugo&lt;/p&gt;
 &lt;h2 id=&#34;installing-hugo-for-local-development&#34;&gt;Installing Hugo for Local Development&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;[!NOTE]
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;
 The instructions provided in this document will be for Ubuntu 24.04.
 Installation instructions for other operating systems are available &lt;a href=&#34;https://gohugo.io/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;Following best practices of not testing in production, I will be setting up a local development environment for my Hugo site. Step-by-step instructions are provided below.&lt;/p&gt;</description>
