@@ -23,7 +23,7 @@ theme = ["PaperMod"]
 [params.profileMode]
     enabled = true
     title = "F. Joe Nichols"
-    subtitle = "21-day sprints to reach functional fluency. <br>Currently: **Building a multi-tenant SSG in Laravel**"
+    subtitle = "21-day sprints to reach functional fluency. <br>Currently: **Building a multi-tenant CMS in Laravel**"
     imageUrl = "images/profile.jpg"
     imageWidth = 150
     imageHeight = 150
