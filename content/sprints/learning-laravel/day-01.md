@@ -28,7 +28,6 @@ A user should be able to sign up, get a dedicated subdomain or path, pick a them
     * Install php, composer, laravel
     * Set up github repo
     * Create the laravel project
-* **Tooling**: Ray for debugging and TablePlus for database visualization are ready.
 * **Naming**: The CMS will be called RhizomeCMS
 
 ### 5. Burn the ships
