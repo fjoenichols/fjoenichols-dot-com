@@ -85,10 +85,7 @@ New PHP manual is available (latest: 3.0.1). Update with `doc --update-manual`
 > $user = App\Models\User::create([
    'email' => '[redacted]',
     'password' => bcrypt('password'),
-]);.     'name' => 'Joe Nichols',
-.     'email' => '[redacted]',
-.     'password' => bcrypt('[redacted]'),
-. ]);
+]);
 = App\Models\User {#6146
     name: "Joe Nichols",
     email: "[redacted]",
@@ -101,9 +98,7 @@ New PHP manual is available (latest: 3.0.1). Update with `doc --update-manual`
 > $user->sites()->create([
 me' => 'Mountain Lotus Digital',
     'slug' => 'mountainlotus',
-]);.     'name' => 'Mountain Lotus Digital',
-.     'slug' => 'mountainlotus',
-. ]);
+]);
 = App\Models\Site {#6892
     name: "Mountain Lotus Digital",
     slug: "mountainlotus",
