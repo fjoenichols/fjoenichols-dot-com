@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Day 3: Tenant Aware Routing | F. Joe Nichols</title>
+<meta name="keywords" content="laravel, php, tech">
+<meta name="description" content="Day 3: Tenant Aware Routing
+Summary
+Going into today&rsquo;s session I had the following goals:
+
+Middleware correctly pulls sudomain from host string
+Middleware throws 404 if no slug in database
+Navigating to mountainlotus.rhizomecms.test displays site name
+
+As part of the setup I added some test domains to /etc/hosts so I could work with them and not have to mess with a dns server.
+
+
+1
+2
+3
+
+
+127.0.0.1   rhizomecms.test
+127.0.0.1   mountainlotus.rhizomecms.test
+127.0.0.1   another-site.rhizomecms.test
+
+
+The Work Session
+Using php artisan again I created the IdentifyTenant middleware.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="F. Joe Nichols (Alt + H)">F. Joe Nichols</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/sprints/learning-laravel/" title="Current Sprint">
+                    <span>Current Sprint</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/21-day-sprints" title="21-Day Sprints">
+                    <span>21-Day Sprints</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/knowledge-log" title="Knowledge Log">
+                    <span>Knowledge Log</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Day 3: Tenant Aware Routing
+    </h1>
+    <div class="post-meta"><span title='2026-01-13 22:45:00 -0700 MST'>January 13, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="day-3-tenant-aware-routing">Day 3: Tenant Aware Routing<a hidden class="anchor" aria-hidden="true" href="#day-3-tenant-aware-routing">#</a></h2>
+<h3 id="summary">Summary<a hidden class="anchor" aria-hidden="true" href="#summary">#</a></h3>
+<p>Going into today&rsquo;s session I had the following goals:</p>
+<ul>
+<li>Middleware correctly pulls sudomain from host string</li>
+<li>Middleware throws 404 if no slug in database</li>
+<li>Navigating to mountainlotus.rhizomecms.test displays site name</li>
+</ul>
+<p>As part of the setup I added some test domains to /etc/hosts so I could work with them and not have to mess with a dns server.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>127.0.0.1   rhizomecms.test
+</span></span><span style="display:flex;"><span>127.0.0.1   mountainlotus.rhizomecms.test
+</span></span><span style="display:flex;"><span>127.0.0.1   another-site.rhizomecms.test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="the-work-session">The Work Session<a hidden class="anchor" aria-hidden="true" href="#the-work-session">#</a></h3>
+<p>Using <code>php artisan</code> again I created the <code>IdentifyTenant</code> middleware.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>$ php artisan make:middleware IdentifyTenant
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   INFO  Middleware [app/Http/Middleware/IdentifyTenant.php] created successfully.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Again, I love that the console output gives the path to file file that was created because I needed to edit it.</p>
+<p>In the handle function I added variables for <code>host</code>, <code>subdomain</code>, and <code>site</code>. This is also when I learned that throwing a 404 for slugs that didn&rsquo;t exist in the database was going to be really simple because <code>firstOrFail()</code> does exactly that!</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">IdentifyTenant</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">     * Handle an incoming request.
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">handle</span>(Request <span style="color:#8be9fd;font-style:italic">$request</span>, Closure <span style="color:#8be9fd;font-style:italic">$next</span>)<span style="color:#ff79c6">:</span> Response
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$host</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">getHost</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$subdomain</span> <span style="color:#ff79c6">=</span> explode(<span style="color:#f1fa8c">&#39;.&#39;</span>, <span style="color:#8be9fd;font-style:italic">$host</span>)[<span style="color:#bd93f9">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$site</span> <span style="color:#ff79c6">=</span> \App\Models\Site<span style="color:#ff79c6">::</span><span style="color:#50fa7b">where</span>(<span style="color:#f1fa8c">&#39;slug&#39;</span>, <span style="color:#8be9fd;font-style:italic">$subdomain</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">firstOrFail</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        app()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">instance</span>(<span style="color:#f1fa8c">&#39;current_site&#39;</span>, <span style="color:#8be9fd;font-style:italic">$site</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$next</span>(<span style="color:#8be9fd;font-style:italic">$request</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After modifying the <code>IdentifyTenant</code> middleware I headed to <code>bootstrap/app.php</code> to register it.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">withMiddleware</span>(<span style="color:#ff79c6">function</span> (Middleware <span style="color:#8be9fd;font-style:italic">$middleware</span>)<span style="color:#ff79c6">:</span> void {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$middleware</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">alias</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#39;identify.tenant&#39;</span> <span style="color:#ff79c6">=&gt;</span> \App\Http\Middleware\IdentifyTenant<span style="color:#ff79c6">::</span><span style="color:#50fa7b">class</span>,
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    })
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then the last step was to set up two route groups. The first route group was just to wrap the existing routes that were there. The second route group was to handle wildcard routing based on tenant.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">domain</span>(<span style="color:#f1fa8c">&#39;{tenant}.rhizomecms.test&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">middleware</span>([<span style="color:#f1fa8c">&#39;identify.tenant&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">group</span>(<span style="color:#ff79c6">function</span> () {
+</span></span><span style="display:flex;"><span>        Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;/&#39;</span>, <span style="color:#ff79c6">function</span> () {
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">$site</span> <span style="color:#ff79c6">=</span> app(<span style="color:#f1fa8c">&#39;current_site&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> <span style="color:#f1fa8c">&#34;Welcome to &#34;</span> <span style="color:#ff79c6">.</span> <span style="color:#8be9fd;font-style:italic">$site</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>;
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">domain</span>(<span style="color:#f1fa8c">&#39;rhizomecms.test&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">group</span>(<span style="color:#ff79c6">function</span> () {
+</span></span><span style="display:flex;"><span>    Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">view</span>(<span style="color:#f1fa8c">&#39;/&#39;</span>, <span style="color:#f1fa8c">&#39;welcome&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">view</span>(<span style="color:#f1fa8c">&#39;dashboard&#39;</span>, <span style="color:#f1fa8c">&#39;dashboard&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">middleware</span>([<span style="color:#f1fa8c">&#39;auth&#39;</span>, <span style="color:#f1fa8c">&#39;verified&#39;</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>(<span style="color:#f1fa8c">&#39;dashboard&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">view</span>(<span style="color:#f1fa8c">&#39;profile&#39;</span>, <span style="color:#f1fa8c">&#39;profile&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">middleware</span>([<span style="color:#f1fa8c">&#39;auth&#39;</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>(<span style="color:#f1fa8c">&#39;profile&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">require</span> __DIR__<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">&#39;/auth.php&#39;</span>;
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After all this I was finally ready to test that subdomain routing worked, but first I had to start the dev server using <code>php artisan</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ php artisan serve --host<span style="color:#ff79c6">=</span>0.0.0.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   INFO  Server running on <span style="color:#ff79c6">[</span>http://0.0.0.0:8000<span style="color:#ff79c6">]</span>.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And then I was finally ready to test&hellip;</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl mountainlotus.rhizomecms.test:8000
+</span></span><span style="display:flex;"><span>Welcome to Mountain Lotus Digital
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Success!</p>
+<p>Then I tested that subdomains that didn&rsquo;t actually exist would throw a 404.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl another-site.rhizomecms.test:8000 -I
+</span></span><span style="display:flex;"><span>HTTP/1.1 <span style="color:#bd93f9">404</span> Not Found
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Success again!</p>
+<p>All of this only took me about 30 minutes to walk through so I decided to see if I could implement a tenant specific home page using a controller in the remaining time.</p>
+<p>So back to <code>php artisan</code> to generate the <code>SiteController</code></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ php artisan make:controller Tenant/SiteController
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   INFO  Controller <span style="color:#ff79c6">[</span>app/Http/Controllers/Tenant/SiteController.php<span style="color:#ff79c6">]</span> created successfully.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then into the site controller to create the index logic.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">SiteController</span> <span style="color:#ff79c6">extends</span> Controller
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">index</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$site</span> <span style="color:#ff79c6">=</span> app(<span style="color:#f1fa8c">&#39;currentl_site&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> response()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">json</span>)[
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#39;site_name&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$site</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#39;owner&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#8be9fd;font-style:italic">$site</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">user</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#39;message&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;Welcome to the Rhizome.&#34;</span>
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And finally back to <code>routes/web.php</code> to tell the <code>/</code> route to use the new <code>SiteController</code> controller.</p>
+<p>Trying to load the page <code>404</code> was displayed for slugs that didn&rsquo;t have tenants. The breeze login page worked for the standard URL, but I had a blank page when trying to access <code>mountainlotus.rhizomecms.test:8000</code>.  It took a bit of troubleshooting but finally I found that I had mistakenly nested the new route into the old route .</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">domain</span>(<span style="color:#f1fa8c">&#39;{tenant}.rhizomecms.test&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">middleware</span>([<span style="color:#f1fa8c">&#39;identify.tenant&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">group</span>(<span style="color:#ff79c6">function</span> () {
+</span></span><span style="display:flex;"><span>        Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;/&#39;</span>, <span style="color:#ff79c6">function</span> () {
+</span></span><span style="display:flex;"><span>            Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">get</span>(<span style="color:#f1fa8c">&#39;/&#39;</span>, [App\Http\Controllers\Tenant\SiteController<span style="color:#ff79c6">::</span><span style="color:#50fa7b">class</span>, <span style="color:#f1fa8c">&#39;index&#39;</span>]);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I fixed this issue and hit refresh on the page and&hellip; ANOTHER ERROR!</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ErrorException
+</span></span><span style="display:flex;"><span>app/Http/Controllers/Tenant/SiteController.php:15
+</span></span><span style="display:flex;"><span>Attempt to read property &#34;name&#34; on null
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Turns out I never updated my Site model with a function to find the site owner.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Site</span> <span style="color:#ff79c6">extends</span> Model
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">protected</span> <span style="color:#8be9fd;font-style:italic">$fillable</span> <span style="color:#ff79c6">=</span> [
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#39;name&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#39;slug&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#39;custom_domain&#39;</span>,
+</span></span><span style="display:flex;"><span>    ];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">user</span>()<span style="color:#ff79c6">:</span> BelongsTo
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">$this</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">belongsTo</span>(User<span style="color:#ff79c6">::</span><span style="color:#50fa7b">class</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And I refresh the page to yet another error. This time a namespace collision.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>TypeError
+</span></span><span style="display:flex;"><span>app/Models/Site.php:17
+</span></span><span style="display:flex;"><span>App\Models\Site::user(): Return value must be of type App\Models\BelongsTo, Illuminate\Database\Eloquent\Relations\BelongsTo returned
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I can fix this by just using the correct <code>BelongsTo</code> at the top of the Site model though&hellip;</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript3" data-lang="gdscript3"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;</span>?php
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>namespace App\Models;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>use Illuminate\Database\Eloquent\Model;
+</span></span><span style="display:flex;"><span>use Illuminate\Database\Eloquent\Relations\BelongsTo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> Site <span style="color:#ff79c6">extends</span> Model
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Refresh the page one more time and&hellip;</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{&#34;site_name&#34;:&#34;Mountain Lotus Digital&#34;,&#34;owner&#34;:&#34;Joe Nichols&#34;,&#34;message&#34;:&#34;Welcome to the Rhizome.&#34;}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Success!</p>
+<h3 id="recap">Recap<a hidden class="anchor" aria-hidden="true" href="#recap">#</a></h3>
+<p>To recap I learned to create the IdentifyTenant middleware, register middleware, and create new routes and route groups which is what I set out to do.  Then I decided I had some time to implement the controller also and ran in to a chain of errors, but I was able to work through them eventually implementing a <code>user(): BelongsTo</code> function in the Site model and creating a controller to return unique results per tenant.</p>
+<p>Overall I went a little bit over an hour at 1 hour 15 minutes, but I&rsquo;d rather be a little over than a little under and get behind.</p>
+<p>Todays code commit is <a href="https://github.com/fjoenichols/RhizomeCMS/commit/6288eb41e8ce8534ce5784413b00ce1d62702072">commit 6288eb4</a>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/laravel/">Laravel</a></li>
+      <li><a href="http://localhost:1313/tags/php/">Php</a></li>
+      <li><a href="http://localhost:1313/tags/tech/">Tech</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">F. Joe Nichols</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -6,8 +6,53 @@
     <description>Recent content in Php on F. Joe Nichols</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Jan 2026 15:30:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 12 Jan 2026 23:30:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 2: Models &amp; Migrations</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-02/</link>
+      <pubDate>Mon, 12 Jan 2026 23:30:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-02/</guid>
+      <description>&lt;h2 id=&#34;day-2-models--migrations&#34;&gt;Day 2: Models &amp;amp; Migrations&lt;/h2&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Going into today&amp;rsquo;s session I had the following goals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a Site model&lt;/li&gt;
+&lt;li&gt;Create a sites table that can be &amp;ldquo;owned&amp;rdquo; by a user&lt;/li&gt;
+&lt;li&gt;Create a site belonging to a user&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I referenced the Laravel migrations doc at &lt;a href=&#34;https://laravel.com/docs/12.x/migrations&#34;&gt;laravel.com/docs/12.x/migrations&lt;/a&gt; and asked Gemini a few clarifying questions when I ran into issues that I couldn&amp;rsquo;t quickly find an answer to.&lt;/p&gt;
+&lt;p&gt;I was also aquainted with &lt;code&gt;php artisan&lt;/code&gt; today, and it feels very much like working with Ruby on Rails scaffolding.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 3: Tenant Aware Routing</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/</link>
+      <pubDate>Mon, 12 Jan 2026 23:30:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/</guid>
+      <description>&lt;h2 id=&#34;day-3-tenant-aware-routing&#34;&gt;Day 3: Tenant Aware Routing&lt;/h2&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Going into today&amp;rsquo;s session I had the following goals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Middleware correctly pulls sudomain from host string&lt;/li&gt;
+&lt;li&gt;Middleware throws 404 if no slug in database&lt;/li&gt;
+&lt;li&gt;Navigating to mountainlotus.rhizomecms.test displays site name&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As part of the setup I added some test domains to /etc/hosts so I could work with them and not have to mess with a dns server.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;127.0.0.1   rhizomecms.test
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;127.0.0.1   mountainlotus.rhizomecms.test
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;127.0.0.1   another-site.rhizomecms.test
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;the-work-session&#34;&gt;The Work Session&lt;/h3&gt;
+&lt;p&gt;Using &lt;code&gt;php artisan&lt;/code&gt; again I created the &lt;code&gt;IdentifyTenant&lt;/code&gt; middleware.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Day 1: Scoping a Multi-Tenant CMS</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-01/</link>
