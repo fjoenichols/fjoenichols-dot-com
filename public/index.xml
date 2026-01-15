@@ -6,8 +6,25 @@
     <description>Recent content on F. Joe Nichols</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Jan 2026 22:45:00 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 14 Jan 2026 19:45:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 4: Building the UI</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-04-building-the-ui/</link>
+      <pubDate>Wed, 14 Jan 2026 19:45:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-04-building-the-ui/</guid>
+      <description>&lt;h2 id=&#34;day-4-building-the-ui&#34;&gt;Day 4: Building the UI&lt;/h2&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Wednesdays are usually pretty busy for me since I go to church after work and don&amp;rsquo;t get home until very near the kids bedtime so I decided to break today into 2 sessions.&lt;/p&gt;
+&lt;p&gt;Going into session 1 I had the following goals:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Set up the &amp;ldquo;Landlord&amp;rdquo; controller&lt;/li&gt;
+&lt;li&gt;Create the route&lt;/li&gt;
+&lt;li&gt;Ensure the Site model works with User relationship&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session-1&#34;&gt;Work Session 1&lt;/h3&gt;
+&lt;p&gt;Using &lt;code&gt;php artisan&lt;/code&gt; again I created the &lt;code&gt;SiteController&lt;/code&gt; controller. Not to be confused with &lt;code&gt;Tenant\SiteController&lt;/code&gt; that I created yesterday.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Day 3: Tenant Aware Routing</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/</link>
