@@ -1,12 +1,12 @@
 +++
-title = "Day 4: Building the UI"
+title = "Day 4: Creating a Form"
 date = 2026-01-14T19:45:00-07:00
 categories = ["21-Day Sprints"]
 sprints = ["Learning Laravel"]
 tags = ["laravel", "php", "tech"]
 +++
 
-## Day 4: Building the UI
+## Day 4: Creating a Form
 ### Summary
 Wednesdays are usually pretty busy for me since I go to church after work and don't get home until very near the kids bedtime so I decided to break today into 2 sessions. 
 
