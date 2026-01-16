@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Day 4: Creating a Form | F. Joe Nichols</title>
+<meta name="keywords" content="laravel, php, tech">
+<meta name="description" content="Day 4: Creating a Form
+Summary
+Wednesdays are usually pretty busy for me since I go to church after work and don&rsquo;t get home until very near the kids bedtime so I decided to break today into 2 sessions.
+Going into session 1 I had the following goals:
+
+Set up the &ldquo;Landlord&rdquo; controller
+Create the route
+Ensure the Site model works with User relationship
+
+Work Session 1
+Using php artisan again I created the SiteController controller. Not to be confused with Tenant\SiteController that I created yesterday.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/sprints/learning-laravel/day-04-creating-a-form-copy/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/sprints/learning-laravel/day-04-creating-a-form-copy/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="F. Joe Nichols (Alt + H)">F. Joe Nichols</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/sprints/learning-laravel/" title="Current Sprint">
+                    <span>Current Sprint</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/21-day-sprints" title="21-Day Sprints">
+                    <span>21-Day Sprints</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/knowledge-log" title="Knowledge Log">
+                    <span>Knowledge Log</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Day 4: Creating a Form
+    </h1>
+    <div class="post-meta"><span title='2026-01-14 19:45:00 -0700 MST'>January 14, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="day-4-creating-a-form">Day 4: Creating a Form<a hidden class="anchor" aria-hidden="true" href="#day-4-creating-a-form">#</a></h2>
+<h3 id="summary">Summary<a hidden class="anchor" aria-hidden="true" href="#summary">#</a></h3>
+<p>Wednesdays are usually pretty busy for me since I go to church after work and don&rsquo;t get home until very near the kids bedtime so I decided to break today into 2 sessions.</p>
+<p>Going into session 1 I had the following goals:</p>
+<ul>
+<li>Set up the &ldquo;Landlord&rdquo; controller</li>
+<li>Create the route</li>
+<li>Ensure the Site model works with User relationship</li>
+</ul>
+<h3 id="work-session-1">Work Session 1<a hidden class="anchor" aria-hidden="true" href="#work-session-1">#</a></h3>
+<p>Using <code>php artisan</code> again I created the <code>SiteController</code> controller. Not to be confused with <code>Tenant\SiteController</code> that I created yesterday.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ php artisan make:controller SiteController
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   INFO  Controller <span style="color:#ff79c6">[</span>app/Http/Controllers/SiteController.php<span style="color:#ff79c6">]</span> created successfully.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In SiteController I included the logic to save new sites. I called the method <code>store</code> and included data validation.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;?</span>php
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">namespace</span> App\Http\Controllers;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> Illuminate\Http\Request;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">use</span> App\Models\Site;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">SiteController</span> <span style="color:#ff79c6">extends</span> Controller
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">store</span>(Request <span style="color:#8be9fd;font-style:italic">$request</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$validated</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">validate</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#39;name&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;required|string|max:255&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#39;slug&#39;</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;required|string|unique:sites,slug|max:255&#39;</span>,
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">user</span>()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">sites</span>()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">create</span>(<span style="color:#8be9fd;font-style:italic">$validated</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> redirect()<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">route</span>(<span style="color:#f1fa8c">&#39;dashboard&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">with</span>(<span style="color:#f1fa8c">&#39;success&#39;</span>, <span style="color:#f1fa8c">&#39;Site created successfully!&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then I added the POST route for <code>/sites</code> and while I was in the file I wrapped all the routes that require authentication inside a middleware group so I didn&rsquo;t have to require auth per route.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>    Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">middleware</span>([<span style="color:#f1fa8c">&#39;auth&#39;</span>, <span style="color:#f1fa8c">&#39;verified&#39;</span>])<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">group</span>(<span style="color:#ff79c6">function</span> () {
+</span></span><span style="display:flex;"><span>        Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">view</span>(<span style="color:#f1fa8c">&#39;dashboard&#39;</span>, <span style="color:#f1fa8c">&#39;dashboard&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>(<span style="color:#f1fa8c">&#39;dashboard&#39;</span>);
+</span></span><span style="display:flex;"><span>        Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">view</span>(<span style="color:#f1fa8c">&#39;profile&#39;</span>, <span style="color:#f1fa8c">&#39;profile&#39;</span>)<span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>(<span style="color:#f1fa8c">&#39;profile&#39;</span>);
+</span></span><span style="display:flex;"><span>        Route<span style="color:#ff79c6">::</span><span style="color:#50fa7b">post</span>(<span style="color:#f1fa8c">&#39;/sites&#39;</span>, [App\Http\Controllers\SiteController<span style="color:#ff79c6">::</span><span style="color:#50fa7b">class</span>, <span style="color:#f1fa8c">&#39;store&#39;</span>])
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">name</span>(<span style="color:#f1fa8c">&#39;sites.store&#39;</span>);
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As I wrapped up the first session I wanted to make sure that everything was working as expected so I decided to use my old friend tinker even though I only met her once before.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; <span style="color:#8be9fd;font-style:italic">$user</span> <span style="color:#ff79c6">=</span> App<span style="color:#f1fa8c">\M</span>odels<span style="color:#f1fa8c">\U</span>ser::first<span style="color:#ff79c6">()</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=</span> App<span style="color:#f1fa8c">\M</span>odels<span style="color:#f1fa8c">\U</span>ser <span style="color:#ff79c6">{</span><span style="color:#6272a4">#6354</span>
+</span></span><span style="display:flex;"><span>    id: 1,
+</span></span><span style="display:flex;"><span>    name: <span style="color:#f1fa8c">&#34;Joe Nichols&#34;</span>,
+</span></span><span style="display:flex;"><span>    email: <span style="color:#f1fa8c">&#34;[redacted]&#34;</span>,
+</span></span><span style="display:flex;"><span>    email_verified_at: null,
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">#password: &#34;[redacted]&#34;,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">#remember_token: null,</span>
+</span></span><span style="display:flex;"><span>    created_at: <span style="color:#f1fa8c">&#34;2026-01-13 06:17:10&#34;</span>,
+</span></span><span style="display:flex;"><span>    updated_at: <span style="color:#f1fa8c">&#34;2026-01-13 06:17:10&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; <span style="color:#8be9fd;font-style:italic">$user</span>-&gt;sites<span style="color:#ff79c6">()</span>-&gt;create<span style="color:#ff79c6">([</span><span style="color:#f1fa8c">&#39;name&#39;</span> <span style="color:#ff79c6">=</span>&gt; <span style="color:#f1fa8c">&#39;Tinker Test Site&#39;</span>, <span style="color:#f1fa8c">&#39;slug&#39;</span> <span style="color:#ff79c6">=</span>&gt; <span style="color:#f1fa8c">&#39;tinker-test&#39;</span>,<span style="color:#ff79c6">])</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=</span> App<span style="color:#f1fa8c">\M</span>odels<span style="color:#f1fa8c">\S</span>ite <span style="color:#ff79c6">{</span><span style="color:#6272a4">#6890</span>
+</span></span><span style="display:flex;"><span>    name: <span style="color:#f1fa8c">&#34;Tinker Test Site&#34;</span>,
+</span></span><span style="display:flex;"><span>    slug: <span style="color:#f1fa8c">&#34;tinker-test&#34;</span>,
+</span></span><span style="display:flex;"><span>    user_id: 1,
+</span></span><span style="display:flex;"><span>    updated_at: <span style="color:#f1fa8c">&#34;2026-01-15 00:01:40&#34;</span>,
+</span></span><span style="display:flex;"><span>    created_at: <span style="color:#f1fa8c">&#34;2026-01-15 00:01:40&#34;</span>,
+</span></span><span style="display:flex;"><span>    id: 2,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; App<span style="color:#f1fa8c">\M</span>odels<span style="color:#f1fa8c">\S</span>ite::latest<span style="color:#ff79c6">()</span>-&gt;first<span style="color:#ff79c6">()</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=</span> App<span style="color:#f1fa8c">\M</span>odels<span style="color:#f1fa8c">\S</span>ite <span style="color:#ff79c6">{</span><span style="color:#6272a4">#6408</span>
+</span></span><span style="display:flex;"><span>    id: 2,
+</span></span><span style="display:flex;"><span>    created_at: <span style="color:#f1fa8c">&#34;2026-01-15 00:01:40&#34;</span>,
+</span></span><span style="display:flex;"><span>    updated_at: <span style="color:#f1fa8c">&#34;2026-01-15 00:01:40&#34;</span>,
+</span></span><span style="display:flex;"><span>    user_id: 1,
+</span></span><span style="display:flex;"><span>    name: <span style="color:#f1fa8c">&#34;Tinker Test Site&#34;</span>,
+</span></span><span style="display:flex;"><span>    slug: <span style="color:#f1fa8c">&#34;tinker-test&#34;</span>,
+</span></span><span style="display:flex;"><span>    custom_domain: null,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="work-session-1-recap">Work Session 1 Recap<a hidden class="anchor" aria-hidden="true" href="#work-session-1-recap">#</a></h3>
+<p>I created a <code>SiteController</code> with the logic to store a new site and created the Route to post <code>/sites</code>. Then I verified I was able to create a site that had a user relationship.</p>
+<p>The commit for the first session is <a href="https://github.com/fjoenichols/RhizomeCMS/commit/b092ebd704f1f1b21954efad1ae3995e2f3ff619">commit b092ebd</a>.</p>
+<p>&ndash;</p>
+<p>For session 2 I had based my goals around the UI:</p>
+<ul>
+<li>Add a site from a form</li>
+<li>Show success and error messages</li>
+<li>Update the dashboard to display sites from the database</li>
+</ul>
+<h3 id="work-session-2">Work Session 2<a hidden class="anchor" aria-hidden="true" href="#work-session-2">#</a></h3>
+<p>The first thing I did after coming back was edit the dahsboard in <code>resources/views/dashboard.blade.php</code>. Laravel Breeze uses tailwind by default so that was nice to just be able to jump in and start creating the UI.  I created a form that allowed users to create a new site, and below the form I added a &ldquo;My Sites&rdquo; section to show sites that belong to the user.</p>
+<p><img alt="Image of New Site Form" loading="lazy" src="/images/learning-laravel/day-04-create-new-site-form.png"></p>
+<p>Once I verified things looked right I added success and error messages above the form.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#ff79c6">@</span><span style="color:#ff79c6">if</span>(session(<span style="color:#f1fa8c">&#39;success&#39;</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&lt;</span>div class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;mb-4 p-4 bg-green-100 text-green-700 rounded border border-green-200&#34;</span><span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>        {{ session(<span style="color:#f1fa8c">&#39;success&#39;</span>) }}
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&lt;/</span>div<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">@</span><span style="color:#ff79c6">endif</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">@</span><span style="color:#ff79c6">if</span>(<span style="color:#8be9fd;font-style:italic">$errors</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">any</span>())
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&lt;</span>div class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;mb-4 p-4 bg-red-100 text-red-700 rounded border border-red-200&#34;</span><span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&lt;</span>ul<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">@</span><span style="color:#ff79c6">foreach</span> (<span style="color:#8be9fd;font-style:italic">$errors</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">all</span>() <span style="color:#ff79c6">as</span> <span style="color:#8be9fd;font-style:italic">$error</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&lt;</span>li<span style="color:#ff79c6">&gt;</span>{{ <span style="color:#8be9fd;font-style:italic">$error</span> }}<span style="color:#ff79c6">&lt;/</span>li<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">@</span><span style="color:#ff79c6">endforeach</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&lt;/</span>ul<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&lt;/</span>div<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">@</span><span style="color:#ff79c6">endif</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then I created a new site and something weird happened. It worked&hellip; kind of.  The success message was just black text on white without the formatting I expected.  After a bit of google I found out I needed to run <code>npm run build</code> to get the Tailwind CSS JIT compiler to build in the green classes I hadn&rsquo;t used previously.  Apparently during development I could have left <code>npm run dev</code> going in a terminal and it would handle this on the fly for me.</p>
+<p><img alt="Successful Site Creation Form" loading="lazy" src="/images/learning-laravel/day-04-create-new-rhizome-success.png"></p>
+<p>Then I clicked a link on a newly created site to make sure it was still rendering json correctly.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;site_name&#34;</span>: <span style="color:#f1fa8c">&#34;Another Site&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;owner&#34;</span>: <span style="color:#f1fa8c">&#34;Joe Nichols&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;message&#34;</span>: <span style="color:#f1fa8c">&#34;Welcome to the Rhizome.&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Woo! Still works.</p>
+<p>One last thing before wrapping up for day. I decided to make sure slugs were always url-friendly to ensure I didn&rsquo;t end up with a slug that wouldn&rsquo;t be able to be resolved.</p>
+<p>Easy enough, I just needed to force slugs to lowercase and make them dash separted busing <code>Str::slug</code> from <code>Illuminate\Support\Str</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">merge</span>([
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#39;slug&#39;</span> <span style="color:#ff79c6">=&gt;</span> Str<span style="color:#ff79c6">::</span><span style="color:#50fa7b">slug</span>(<span style="color:#8be9fd;font-style:italic">$request</span><span style="color:#ff79c6">-&gt;</span><span style="color:#50fa7b">slug</span>),
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="recap">Recap<a hidden class="anchor" aria-hidden="true" href="#recap">#</a></h3>
+<p>The second session for tonight was focused on the UI and getting a working form on the dashboard. So far working with Laravel has been really straight forward. I think my previous experience working with similar MVC or MVT frameworks like ruby-on-rails and django helps me understand the way things are working abit better.</p>
+<p>The commit for this session is <a href="https://github.com/fjoenichols/RhizomeCMS/commit/4d2724a330f678ecc8113206355b339b5e7be68a">commit 4d2724a</a>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/laravel/">Laravel</a></li>
+      <li><a href="http://localhost:1313/tags/php/">Php</a></li>
+      <li><a href="http://localhost:1313/tags/tech/">Tech</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">F. Joe Nichols</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
