@@ -36,7 +36,10 @@ theme = ["PaperMod"]
     [[params.profileMode.buttons]]
         name = "Knowledge Log"
         url = "/categories/knowledge-log"
-    
+
+[[params.socialIcons]]
+    name = "email"
+    url = "mailto:joe@fjoenichols.com"    
 [[params.socialIcons]]
     name = "github"
     url = "https://github.com/fjoenichols"

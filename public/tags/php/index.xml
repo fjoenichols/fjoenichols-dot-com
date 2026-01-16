@@ -6,14 +6,24 @@
     <description>Recent content in Php on F. Joe Nichols</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Jan 2026 19:45:00 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jan 2026 19:45:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/php/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Day 4: Building the UI</title>
-      <link>http://localhost:1313/sprints/learning-laravel/day-04-building-the-ui/</link>
+      <title>Day 5: Dynamic Rendering</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-05-dynamic-rendering/</link>
+      <pubDate>Thu, 15 Jan 2026 19:45:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-05-dynamic-rendering/</guid>
+      <description>&lt;h2 id=&#34;day-5-dynamic-rendering&#34;&gt;Day 5: Dynamic Rendering&lt;/h2&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Before I went to bed yesterday I decided to lean into the Rhizome theme a bit harder and renamed Sites to Shoots. Along that same these instead of creating sites we&amp;rsquo;ll be sprouting shoots. I did not rename anything in the database, middleware, or controller. I just changed the views to reflect the botanical theme.&lt;/p&gt;
+&lt;p&gt;For Day 5 my goal was to transform shoots from identical placeholders into dynamic pages by allowing users to define a description and a theme color during the &amp;ldquo;sprouting&amp;rdquo; process.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 4: Creating a Form</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-04-creating-a-form/</link>
       <pubDate>Wed, 14 Jan 2026 19:45:00 -0700</pubDate>
-      <guid>http://localhost:1313/sprints/learning-laravel/day-04-building-the-ui/</guid>
-      <description>&lt;h2 id=&#34;day-4-building-the-ui&#34;&gt;Day 4: Building the UI&lt;/h2&gt;
+      <guid>http://localhost:1313/sprints/learning-laravel/day-04-creating-a-form/</guid>
+      <description>&lt;h2 id=&#34;day-4-creating-a-form&#34;&gt;Day 4: Creating a Form&lt;/h2&gt;
 &lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
 &lt;p&gt;Wednesdays are usually pretty busy for me since I go to church after work and don&amp;rsquo;t get home until very near the kids bedtime so I decided to break today into 2 sessions.&lt;/p&gt;
 &lt;p&gt;Going into session 1 I had the following goals:&lt;/p&gt;

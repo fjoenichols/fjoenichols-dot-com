@@ -3,33 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/categories/21-day-sprints/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/sprints/learning-laravel/day-04-building-the-ui/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <loc>http://localhost:1313/sprints/learning-laravel/day-05-dynamic-rendering/</loc>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/laravel/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/sprints/learning-laravel/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/php/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/sprints/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-01-14T19:45:00-07:00</lastmod>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/tech/</loc>
+    <lastmod>2026-01-15T19:45:00-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/sprints/learning-laravel/day-04-creating-a-form/</loc>
     <lastmod>2026-01-14T19:45:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/</loc>

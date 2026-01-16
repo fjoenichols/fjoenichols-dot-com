@@ -6,12 +6,12 @@
     <description>Recent content in Sprints on F. Joe Nichols</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Jan 2026 19:45:00 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 15 Jan 2026 19:45:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/sprints/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learning Laravel</title>
       <link>http://localhost:1313/sprints/learning-laravel/</link>
-      <pubDate>Wed, 14 Jan 2026 19:45:00 -0700</pubDate>
+      <pubDate>Thu, 15 Jan 2026 19:45:00 -0700</pubDate>
       <guid>http://localhost:1313/sprints/learning-laravel/</guid>
       <description>My 21-day journey to build a multi-tenant website generator using Laravel.</description>
     </item>
