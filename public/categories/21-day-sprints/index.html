@@ -129,6 +129,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Day 6: Templating &amp; Dynamic Styling
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Day 6: Templating &amp; Dynamic Styling Summary Today’s Definition of Done:
+Template Creation Primary colors changed based on theme_color. name and description rendered in HTML Tenant/SiteController returns html instead of json. Work Session In order to handle tenant homepages I created a new view at resources/views/tenant/home.blade.php.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 &lt;!DOCTYPE html&gt; &lt;html lang=&#34;en&#34;&gt; &lt;head&gt; &lt;meta charset=&#34;UTF-8&#34;&gt; &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt; &lt;title&gt;{{ $site-&gt;name }}&lt;/title&gt; @vite([&#39;resources/css/app.css&#39;, &#39;resources/js/app.js&#39;]) &lt;/head&gt; &lt;body class=&#34;bg-gray-100 font-sans antialiased&#34;&gt; @php $colors = [ &#39;blue&#39; =&gt; &#39;bg-blue-600 border-blue-800&#39;, &#39;green&#39; =&gt; &#39;bg-green-600 border-green-800&#39;, &#39;purple&#39; =&gt; &#39;bg-purple-600 border-purple-800&#39;, ]; $themeClasses = $colors[$site-&gt;theme_color] ?? $colors[&#39;blue&#39;]; @endphp &lt;div class=&#34;min-h-screen flex flex-col items-center justify-center&#34;&gt; &lt;div class=&#34;max-w-2xl w-full bg-white shadow-xl rounded-lg overflow-hidden border-t-8 {{ $themeClasses }}&#34;&gt; &lt;div class=&#34;p-8&#34;&gt; &lt;h1 class=&#34;text-4xl font-extrabold text-gray-900 mb-4&#34;&gt; {{ $site-&gt;name }} &lt;/h1&gt; &lt;p class=&#34;text-lg text-gray-600 leading-relaxed mb-6&#34;&gt; {{ $site-&gt;description ?? &#39;This shoot is just beginning to grow.&#39; }} &lt;/p&gt; &lt;div class=&#34;pt-6 border-t border-gray-100&#34;&gt; &lt;p class=&#34;text-sm text-gray-500 italic&#34;&gt; Sprouted by {{ $site-&gt;user-&gt;name }} &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Then I updated Tenant\SiteController to use the new view I just created.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-16 19:00:00 -0700 MST'>January 16, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Day 6: Templating & Dynamic Styling" href="http://localhost:1313/sprints/learning-laravel/day-06-templating-and-dynamic-styling/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Day 5: Dynamic Rendering
     </h2>
   </header>
