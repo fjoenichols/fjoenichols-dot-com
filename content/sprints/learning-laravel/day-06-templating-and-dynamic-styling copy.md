@@ -6,7 +6,6 @@ sprints = ["Learning Laravel"]
 tags = ["laravel", "php", "tech"]
 +++
 
-## Day 6: Templating & Dynamic Styling
 ### Summary
 Today's Definition of Done:
 - Template Creation

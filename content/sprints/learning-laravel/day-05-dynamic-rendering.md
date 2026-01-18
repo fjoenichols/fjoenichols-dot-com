@@ -6,7 +6,6 @@ sprints = ["Learning Laravel"]
 tags = ["laravel", "php", "tech"]
 +++
 
-## Day 5: Dynamic Rendering
 ### Summary
 Before I went to bed yesterday I decided to lean into the Rhizome theme a bit harder and renamed Sites to Shoots. Along that same these instead of creating sites we'll be sprouting shoots. I did not rename anything in the database, middleware, or controller. I just changed the views to reflect the botanical theme. 
 

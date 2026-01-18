@@ -6,7 +6,6 @@ sprints = ["Learning Laravel"]
 tags = ["laravel", "php", "tech"]
 +++
 
-## Day 2: Models & Migrations
 ### Summary
 Going into today's session I had the following goals:
 - Create a Site model

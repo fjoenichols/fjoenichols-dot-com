@@ -6,7 +6,6 @@ sprints = ["Learning Laravel"]
 tags = ["laravel", "php", "tech"]
 +++
 
-## Day 3: Tenant Aware Routing
 ### Summary
 Going into today's session I had the following goals:
 - Middleware correctly pulls sudomain from host string
