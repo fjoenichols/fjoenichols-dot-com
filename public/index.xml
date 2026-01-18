@@ -13,8 +13,7 @@
       <link>http://localhost:1313/sprints/learning-laravel/day-07-completing-the-crud-cycle/</link>
       <pubDate>Sat, 17 Jan 2026 16:00:00 -0700</pubDate>
       <guid>http://localhost:1313/sprints/learning-laravel/day-07-completing-the-crud-cycle/</guid>
-      <description>&lt;h2 id=&#34;day-7-completing-the-crud-cycle&#34;&gt;Day 7: Completing the CRUD Cycle&lt;/h2&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
 &lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Shoot owner can edit description and color&lt;/li&gt;
@@ -86,8 +85,7 @@
       <link>http://localhost:1313/sprints/learning-laravel/day-06-templating-and-dynamic-styling-copy/</link>
       <pubDate>Fri, 16 Jan 2026 19:00:00 -0700</pubDate>
       <guid>http://localhost:1313/sprints/learning-laravel/day-06-templating-and-dynamic-styling-copy/</guid>
-      <description>&lt;h2 id=&#34;day-6-templating--dynamic-styling&#34;&gt;Day 6: Templating &amp;amp; Dynamic Styling&lt;/h2&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
 &lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Template Creation&lt;/li&gt;
