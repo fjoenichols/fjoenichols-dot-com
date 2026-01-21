@@ -6,8 +6,25 @@
     <description>Recent content on F. Joe Nichols</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jan 2026 19:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 20 Jan 2026 19:00:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 9: Page Management UI</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-09-page-management-ui/</link>
+      <pubDate>Tue, 20 Jan 2026 19:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-09-page-management-ui/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;For Day 9 the goal was to turn allow users to edit their pages through the dashboard..&lt;/p&gt;
+&lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Can access manage pages dashboard from shoot list&lt;/li&gt;
+&lt;li&gt;All pages for a site listed in index view&lt;/li&gt;
+&lt;li&gt;Create page form in the dashboard&lt;/li&gt;
+&lt;li&gt;Can create a page and see it live&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;The first thing I did was add a button to my main list to &lt;code&gt;Manage Pages&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Day 8: Growing a Shoot</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-08-growing-a-shoot/</link>

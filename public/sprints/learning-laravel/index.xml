@@ -43,6 +43,40 @@
 &lt;/div&gt;&lt;p&gt;Then I edited the migration to give the &lt;code&gt;pages&lt;/code&gt; table the right schema.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Day 8: Growing a Shoot</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-09-page-management-ui/</link>
+      <pubDate>Mon, 19 Jan 2026 19:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-09-page-management-ui/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;For Day 8 the goal is to turn a Shoot into a functional multi-page site.&lt;/p&gt;
+&lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pages&lt;/code&gt; table linked to &lt;code&gt;sites&lt;/code&gt; table via &lt;code&gt;site_id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Site model can have many Page models&lt;/li&gt;
+&lt;li&gt;Routing for pages works&lt;/li&gt;
+&lt;li&gt;Sub-pages can be viewed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;The first thing I did today is create a model using artisan for the Page model.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ php artisan make:model Page -m
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   INFO  Model &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;app/Models/Page.php&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt; created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   INFO  Migration &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;database/migrations/2026_01_20_033243_create_pages_table.php&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt; created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Then I edited the migration to give the &lt;code&gt;pages&lt;/code&gt; table the right schema.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Day 7: Completing the CRUD Cycle</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-07-completing-the-crud-cycle/</link>
       <pubDate>Sat, 17 Jan 2026 16:00:00 -0700</pubDate>
