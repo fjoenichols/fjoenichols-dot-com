@@ -4,7 +4,7 @@
     <title>Posts on F. Joe Nichols</title>
     <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on F. Joe Nichols</description>
-    <generator>Hugo -- 0.151.0</generator>
+    <generator>Hugo -- 0.154.5</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 10 Jan 2026 14:30:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
@@ -33,7 +33,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;
 The instructions provided in this document will be for Ubuntu 24.04.
-Installation instructions for other operating systems are available &lt;a href=&#34;https://gohugo.io/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
+Installation instructions for other operating systems are available &lt;a href=&#34;https://gohugo.io/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Following best practices of not testing in production, I will be setting up a local development environment for my Hugo site. Step-by-step instructions are provided below.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -1,7 +1,7 @@
 baseURL = 'https://fjoenichols.com/'
 languageCode = 'en-us'
 title = 'F. Joe Nichols'
-theme = ["PaperMod"]
+theme = "PaperMod"
 
 [markup]
   [markup.highlight]

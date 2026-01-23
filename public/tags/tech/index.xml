@@ -4,10 +4,59 @@
     <title>Tech on F. Joe Nichols</title>
     <link>http://localhost:1313/tags/tech/</link>
     <description>Recent content in Tech on F. Joe Nichols</description>
-    <generator>Hugo -- 0.151.0</generator>
+    <generator>Hugo -- 0.154.5</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jan 2026 19:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 21 Jan 2026 18:00:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 10: Page Editing</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-10-page-editing/</link>
+      <pubDate>Wed, 21 Jan 2026 18:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-10-page-editing/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Navigation to a site&amp;rsquo;s page index&lt;/li&gt;
+&lt;li&gt;Abot to Edit my &amp;ldquo;about&amp;rdquo; page&lt;/li&gt;
+&lt;li&gt;Auto-slug implemented where slug is filled based on title.&lt;/li&gt;
+&lt;li&gt;Refreshing a subdomain reflects changes immediately&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;It&amp;rsquo;s Wednesday again so I was in a bit of a rush to get this done and get to church on time. I implemented pages for edit and create along with a delete method that has a popup confirmation.  This is all very similar to what I did in day 7 for sites but it&amp;rsquo;s for pages that belong to sites now.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 11: Test</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-11-test/</link>
+      <pubDate>Wed, 21 Jan 2026 18:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-11-test/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Navigation to a site&amp;rsquo;s page index&lt;/li&gt;
+&lt;li&gt;Abot to Edit my &amp;ldquo;about&amp;rdquo; page&lt;/li&gt;
+&lt;li&gt;Auto-slug implemented where slug is filled based on title.&lt;/li&gt;
+&lt;li&gt;Refreshing a subdomain reflects changes immediately&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;It&amp;rsquo;s Wednesday again so I was in a bit of a rush to get this done and get to church on time. I implemented pages for edit and create along with a delete method that has a popup confirmation.  This is all very similar to what I did in day 7 for sites but it&amp;rsquo;s for pages that belong to sites now.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 9: Page Management UI</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-09-page-management-ui/</link>
+      <pubDate>Tue, 20 Jan 2026 19:00:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-09-page-management-ui/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;For Day 9 the goal was to turn allow users to edit their pages through the dashboard..&lt;/p&gt;
+&lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Can access manage pages dashboard from shoot list&lt;/li&gt;
+&lt;li&gt;All pages for a site listed in index view&lt;/li&gt;
+&lt;li&gt;Create page form in the dashboard&lt;/li&gt;
+&lt;li&gt;Can create a page and see it live&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;The first thing I did was add a button to my main list to &lt;code&gt;Manage Pages&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Day 8: Growing a Shoot</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-08-growing-a-shoot/</link>
@@ -309,7 +358,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;
 The instructions provided in this document will be for Ubuntu 24.04.
-Installation instructions for other operating systems are available &lt;a href=&#34;https://gohugo.io/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
+Installation instructions for other operating systems are available &lt;a href=&#34;https://gohugo.io/installation/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Following best practices of not testing in production, I will be setting up a local development environment for my Hugo site. Step-by-step instructions are provided below.&lt;/p&gt;</description>
     </item>
   </channel>
