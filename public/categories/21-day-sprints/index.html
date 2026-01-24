@@ -145,6 +145,22 @@ After I got everything set back up I was able to get to work on my day 11 object
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Day 12: Improving Site Templates
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Summary For Day 12 my goal is to improve the template for pages to be more brandable.
+Today’s Definition of Done:
+Add hero_title, hero_subtitle, cta_text, and business_phone to the sites table Add a section in the dashboard to manage the new fields Add a “Hero” area on the home page Work Session Since I am changing the database the first thing I had to do was a migration.
+1 2 3 $ php artisan make:migration add_brand_fields_to_sites_table INFO Migration [database/migrations/2026_01_24_021927_add_brand_fields_to_sites_table.php] created successfully. Then I created all the of the fields in the migration file
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-22 19:40:00 -0700 MST'>January 22, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Day 12: Improving Site Templates" href="http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Day 10: Page Editing
     </h2>
   </header>
@@ -260,21 +276,6 @@ Middleware correctly pulls sudomain from host string Middleware throws 404 if no
   </div>
   <footer class="entry-footer"><span title='2026-01-13 22:45:00 -0700 MST'>January 13, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Day 3: Tenant Aware Routing" href="http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Day 2: Models &amp; Migrations
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Summary Going into today’s session I had the following goals:
-Create a Site model Create a sites table that can be “owned” by a user Create a site belonging to a user I referenced the Laravel migrations doc at laravel.com/docs/12.x/migrations and asked Gemini a few clarifying questions when I ran into issues that I couldn’t quickly find an answer to.
-I was also aquainted with php artisan today, and it feels very much like working with Ruby on Rails scaffolding.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-12 23:30:00 -0700 MST'>January 12, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Day 2: Models & Migrations" href="http://localhost:1313/sprints/learning-laravel/day-02-models-and-migrations/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

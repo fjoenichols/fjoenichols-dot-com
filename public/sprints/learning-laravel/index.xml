@@ -9,20 +9,38 @@
     <lastBuildDate>Thu, 22 Jan 2026 19:40:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/sprints/learning-laravel/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Day 11: Test</title>
+      <title>Day 11: Site Navigation</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-11-site-navigation/</link>
       <pubDate>Thu, 22 Jan 2026 19:40:00 -0700</pubDate>
       <guid>http://localhost:1313/sprints/learning-laravel/day-11-site-navigation/</guid>
       <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;For Day 11 my goal is to get dynamic navigation working for the pages on a site.&lt;/p&gt;
 &lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Navigation to a site&amp;rsquo;s page index&lt;/li&gt;
-&lt;li&gt;Abot to Edit my &amp;ldquo;about&amp;rdquo; page&lt;/li&gt;
-&lt;li&gt;Auto-slug implemented where slug is filled based on title.&lt;/li&gt;
-&lt;li&gt;Refreshing a subdomain reflects changes immediately&lt;/li&gt;
+&lt;li&gt;Links dynmically created for page&lt;/li&gt;
+&lt;li&gt;Routing between pages works&lt;/li&gt;
+&lt;li&gt;Active link is a different color&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
-&lt;p&gt;It&amp;rsquo;s Wednesday again so I was in a bit of a rush to get this done and get to church on time. I implemented pages for edit and create along with a delete method that has a popup confirmation.  This is all very similar to what I did in day 7 for sites but it&amp;rsquo;s for pages that belong to sites now.&lt;/p&gt;</description>
+&lt;p&gt;I reinstalled my PC yesterday so I spent a lot of time today getting my PC set back up with the dev environments for both RhizomeCMS and my Hugo Site.&lt;/p&gt;
+&lt;p&gt;After I got everything set back up I was able to get to work on my day 11 objectives starting with updating the Tenant Controller to get a list of all sibling pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 11: Site Navigation</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/</link>
+      <pubDate>Thu, 22 Jan 2026 19:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;For Day 11 my goal is to get dynamic navigation working for the pages on a site.&lt;/p&gt;
+&lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Links dynmically created for page&lt;/li&gt;
+&lt;li&gt;Routing between pages works&lt;/li&gt;
+&lt;li&gt;Active link is a different color&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;I reinstalled my PC yesterday so I spent a lot of time today getting my PC set back up with the dev environments for both RhizomeCMS and my Hugo Site.&lt;/p&gt;
+&lt;p&gt;After I got everything set back up I was able to get to work on my day 11 objectives starting with updating the Tenant Controller to get a list of all sibling pages.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Day 10: Page Editing</title>
