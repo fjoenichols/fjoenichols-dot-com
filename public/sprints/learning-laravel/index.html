@@ -132,6 +132,62 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Day 16: Styled Home and Hero
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Summary Today I created the base styles for the home page and included the hero section along with the nav menu. It was a bit cumbersome figuring out how the layouts and components worked, but I got it done. I also updated the SiteController to ensure /home and / go to the same page instead of having an two variants on the same page.
+Commit The commit for todays session is commit d8cd4ee.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-02-02 17:40:00 -0700 MST'>February 2, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Day 16: Styled Home and Hero" href="http://localhost:1313/sprints/learning-laravel/day-16-styled-home-and-hero/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Day 15: Home page fields
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Summary Getting a little more back in the swing of things today I was able to add some new fields for the home page and make the livewire component use those new fields. The idea here is that someone can create a home page, fill in the fields asked for, and get a professional looking page with a hero, about, and services section.
+Commit The commit for todays session is commit 4f0e71c.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-29 19:40:00 -0700 MST'>January 29, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Day 15: Home page fields" href="http://localhost:1313/sprints/learning-laravel/day-15-home-page-fields/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Day 14: Livewire Autosave
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Summary Well I wanted to make things a bit more reactive on the webapp side so I decided to implement some livewire components to do page autosave when the fields are being edited. What I thought was going to be pretty straight forward turned into a bit of a fiasco for a very silly reason.
+Work Session Setting up livewire to use was fairly straight forward just using composer to do the livewire install.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-28 19:40:00 -0700 MST'>January 28, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Day 14: Livewire Autosave" href="http://localhost:1313/sprints/learning-laravel/day-14-livewire-autosave/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Day 13: The Flu &amp; A Pivot
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Summary I had hoped to be a lot furhter along by now, but I ended up getting the flu on Saturday, slept most of the day Sunday and Monday, and I’m just now feeling like getting out of bed and doing stuff again so here’s day 13 three days late.
+I made a pivot from sqlite to postgres so I can verify things work when I get ready to publish to cloud.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-27 17:40:00 -0700 MST'>January 27, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Day 13: The Flu & A Pivot" href="http://localhost:1313/sprints/learning-laravel/day-13-the-flu-and-a-pivot/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Day 11: Site Navigation
     </h2>
   </header>
@@ -148,18 +204,18 @@ After I got everything set back up I was able to get to work on my day 11 object
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Day 11: Site Navigation
+    <h2 class="entry-hint-parent">Day 12: Improving Site Templates
     </h2>
   </header>
   <div class="entry-content">
-    <p>Summary For Day 11 my goal is to get dynamic navigation working for the pages on a site.
+    <p>Summary For Day 12 my goal is to improve the template for pages to be more brandable.
 Today’s Definition of Done:
-Links dynmically created for page Routing between pages works Active link is a different color Work Session I reinstalled my PC yesterday so I spent a lot of time today getting my PC set back up with the dev environments for both RhizomeCMS and my Hugo Site.
-After I got everything set back up I was able to get to work on my day 11 objectives starting with updating the Tenant Controller to get a list of all sibling pages.
+Add hero_title, hero_subtitle, cta_text, and business_phone to the sites table Add a section in the dashboard to manage the new fields Add a “Hero” area on the home page Work Session Since I am changing the database the first thing I had to do was a migration.
+1 2 3 $ php artisan make:migration add_brand_fields_to_sites_table INFO Migration [database/migrations/2026_01_24_021927_add_brand_fields_to_sites_table.php] created successfully. Then I created all the of the fields in the migration file
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-01-22 19:40:00 -0700 MST'>January 22, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Day 11: Site Navigation" href="http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/"></a>
+  <a class="entry-link" aria-label="post link to Day 12: Improving Site Templates" href="http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -220,65 +276,6 @@ Shoot owner can edit description and color Shoot owner can destroy a shoot after
   </div>
   <footer class="entry-footer"><span title='2026-01-17 16:00:00 -0700 MST'>January 17, 2026</span></footer>
   <a class="entry-link" aria-label="post link to Day 7: Completing the CRUD Cycle" href="http://localhost:1313/sprints/learning-laravel/day-07-completing-the-crud-cycle/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Day 6: Templating &amp; Dynamic Styling
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Summary Today’s Definition of Done:
-Template Creation Primary colors changed based on theme_color. name and description rendered in HTML Tenant/SiteController returns html instead of json. Work Session In order to handle tenant homepages I created a new view at resources/views/tenant/home.blade.php.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 &lt;!DOCTYPE html&gt; &lt;html lang=&#34;en&#34;&gt; &lt;head&gt; &lt;meta charset=&#34;UTF-8&#34;&gt; &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt; &lt;title&gt;{{ $site-&gt;name }}&lt;/title&gt; @vite([&#39;resources/css/app.css&#39;, &#39;resources/js/app.js&#39;]) &lt;/head&gt; &lt;body class=&#34;bg-gray-100 font-sans antialiased&#34;&gt; @php $colors = [ &#39;blue&#39; =&gt; &#39;bg-blue-600 border-blue-800&#39;, &#39;green&#39; =&gt; &#39;bg-green-600 border-green-800&#39;, &#39;purple&#39; =&gt; &#39;bg-purple-600 border-purple-800&#39;, ]; $themeClasses = $colors[$site-&gt;theme_color] ?? $colors[&#39;blue&#39;]; @endphp &lt;div class=&#34;min-h-screen flex flex-col items-center justify-center&#34;&gt; &lt;div class=&#34;max-w-2xl w-full bg-white shadow-xl rounded-lg overflow-hidden border-t-8 {{ $themeClasses }}&#34;&gt; &lt;div class=&#34;p-8&#34;&gt; &lt;h1 class=&#34;text-4xl font-extrabold text-gray-900 mb-4&#34;&gt; {{ $site-&gt;name }} &lt;/h1&gt; &lt;p class=&#34;text-lg text-gray-600 leading-relaxed mb-6&#34;&gt; {{ $site-&gt;description ?? &#39;This shoot is just beginning to grow.&#39; }} &lt;/p&gt; &lt;div class=&#34;pt-6 border-t border-gray-100&#34;&gt; &lt;p class=&#34;text-sm text-gray-500 italic&#34;&gt; Sprouted by {{ $site-&gt;user-&gt;name }} &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; Then I updated Tenant\SiteController to use the new view I just created.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-16 19:00:00 -0700 MST'>January 16, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Day 6: Templating & Dynamic Styling" href="http://localhost:1313/sprints/learning-laravel/day-06-templating-and-dynamic-styling-copy/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Day 5: Dynamic Rendering
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Summary Before I went to bed yesterday I decided to lean into the Rhizome theme a bit harder and renamed Sites to Shoots. Along that same these instead of creating sites we’ll be sprouting shoots. I did not rename anything in the database, middleware, or controller. I just changed the views to reflect the botanical theme.
-For Day 5 my goal was to transform shoots from identical placeholders into dynamic pages by allowing users to define a description and a theme color during the “sprouting” process.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-15 19:45:00 -0700 MST'>January 15, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Day 5: Dynamic Rendering" href="http://localhost:1313/sprints/learning-laravel/day-05-dynamic-rendering/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Day 4: Creating a Form
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Summary Wednesdays are usually pretty busy for me since I go to church after work and don’t get home until very near the kids bedtime so I decided to break today into 2 sessions.
-Going into session 1 I had the following goals:
-Set up the “Landlord” controller Create the route Ensure the Site model works with User relationship Work Session 1 Using php artisan again I created the SiteController controller. Not to be confused with Tenant\SiteController that I created yesterday.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-14 19:45:00 -0700 MST'>January 14, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Day 4: Creating a Form" href="http://localhost:1313/sprints/learning-laravel/day-04-creating-a-form/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Day 3: Tenant Aware Routing
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Summary Going into today’s session I had the following goals:
-Middleware correctly pulls sudomain from host string Middleware throws 404 if no slug in database Navigating to mountainlotus.rhizomecms.test displays site name As part of the setup I added some test domains to /etc/hosts so I could work with them and not have to mess with a dns server.
-1 2 3 127.0.0.1 rhizomecms.test 127.0.0.1 mountainlotus.rhizomecms.test 127.0.0.1 another-site.rhizomecms.test The Work Session Using php artisan again I created the IdentifyTenant middleware.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-01-13 22:45:00 -0700 MST'>January 13, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Day 3: Tenant Aware Routing" href="http://localhost:1313/sprints/learning-laravel/day-03-tenant-aware-routing/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

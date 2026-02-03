@@ -6,8 +6,48 @@
     <description>Recent content on F. Joe Nichols</description>
     <generator>Hugo -- 0.154.5</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jan 2026 19:40:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 02 Feb 2026 17:40:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 16: Styled Home and Hero</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-16-styled-home-and-hero/</link>
+      <pubDate>Mon, 02 Feb 2026 17:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-16-styled-home-and-hero/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Today I created the base styles for the home page and included the hero section along with the nav menu. It was a bit cumbersome figuring out how the layouts and components worked, but I got it done.  I also updated the SiteController to ensure /home and / go to the same page instead of having an two variants on the same page.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Home Page w/ Menu&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/learning-laravel/day-16-home-and-hero.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;commit&#34;&gt;Commit&lt;/h3&gt;
+&lt;p&gt;The commit for todays session is &lt;a href=&#34;https://github.com/fjoenichols/RhizomeCMS/commit/d8cd4ee6f5fdac2244c97ff2adbe866bf0af2113&#34;&gt;commit d8cd4ee&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 15: Home page fields</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-15-home-page-fields/</link>
+      <pubDate>Thu, 29 Jan 2026 19:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-15-home-page-fields/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Getting a little more back in the swing of things today I was able to add some new fields for the home page and make the livewire component use those new fields.  The idea here is that someone can create a home page, fill in the fields asked for, and get a professional looking page with a hero, about, and services section.&lt;/p&gt;
+&lt;h3 id=&#34;commit&#34;&gt;Commit&lt;/h3&gt;
+&lt;p&gt;The commit for todays session is &lt;a href=&#34;https://github.com/fjoenichols/RhizomeCMS/commit/4f0e71c19044c74f647101679f3acd2916a9f278&#34;&gt;commit 4f0e71c&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 14: Livewire Autosave</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-14-livewire-autosave/</link>
+      <pubDate>Wed, 28 Jan 2026 19:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-14-livewire-autosave/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Well I wanted to make things a bit more reactive on the webapp side so I decided to implement some livewire components to do page autosave when the fields are being edited. What I thought was going to be pretty straight forward turned into a bit of a fiasco for a very silly reason.&lt;/p&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;Setting up livewire to use was fairly straight forward just using composer to do the livewire install.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 13: The Flu &amp; A Pivot</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-13-the-flu-and-a-pivot/</link>
+      <pubDate>Tue, 27 Jan 2026 17:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-13-the-flu-and-a-pivot/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;I had hoped to be a lot furhter along by now, but I ended up getting the flu on Saturday, slept most of the day Sunday and Monday, and I&amp;rsquo;m just now feeling like getting out of bed and doing stuff again so here&amp;rsquo;s day 13 three days late.&lt;/p&gt;
+&lt;p&gt;I made a pivot from sqlite to postgres so I can verify things work when I get ready to publish to cloud.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Day 11: Site Navigation</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-11-site-navigation/</link>

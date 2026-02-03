@@ -6,8 +6,48 @@
     <description>Recent content in Learning Laravel on F. Joe Nichols</description>
     <generator>Hugo -- 0.154.5</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jan 2026 19:40:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 02 Feb 2026 17:40:00 -0700</lastBuildDate>
     <atom:link href="http://localhost:1313/sprints/learning-laravel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day 16: Styled Home and Hero</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-16-styled-home-and-hero/</link>
+      <pubDate>Mon, 02 Feb 2026 17:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-16-styled-home-and-hero/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Today I created the base styles for the home page and included the hero section along with the nav menu. It was a bit cumbersome figuring out how the layouts and components worked, but I got it done.  I also updated the SiteController to ensure /home and / go to the same page instead of having an two variants on the same page.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Home Page w/ Menu&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/learning-laravel/day-16-home-and-hero.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;commit&#34;&gt;Commit&lt;/h3&gt;
+&lt;p&gt;The commit for todays session is &lt;a href=&#34;https://github.com/fjoenichols/RhizomeCMS/commit/d8cd4ee6f5fdac2244c97ff2adbe866bf0af2113&#34;&gt;commit d8cd4ee&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 15: Home page fields</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-15-home-page-fields/</link>
+      <pubDate>Thu, 29 Jan 2026 19:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-15-home-page-fields/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Getting a little more back in the swing of things today I was able to add some new fields for the home page and make the livewire component use those new fields.  The idea here is that someone can create a home page, fill in the fields asked for, and get a professional looking page with a hero, about, and services section.&lt;/p&gt;
+&lt;h3 id=&#34;commit&#34;&gt;Commit&lt;/h3&gt;
+&lt;p&gt;The commit for todays session is &lt;a href=&#34;https://github.com/fjoenichols/RhizomeCMS/commit/4f0e71c19044c74f647101679f3acd2916a9f278&#34;&gt;commit 4f0e71c&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 14: Livewire Autosave</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-14-livewire-autosave/</link>
+      <pubDate>Wed, 28 Jan 2026 19:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-14-livewire-autosave/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;Well I wanted to make things a bit more reactive on the webapp side so I decided to implement some livewire components to do page autosave when the fields are being edited. What I thought was going to be pretty straight forward turned into a bit of a fiasco for a very silly reason.&lt;/p&gt;
+&lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
+&lt;p&gt;Setting up livewire to use was fairly straight forward just using composer to do the livewire install.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Day 13: The Flu &amp; A Pivot</title>
+      <link>http://localhost:1313/sprints/learning-laravel/day-13-the-flu-and-a-pivot/</link>
+      <pubDate>Tue, 27 Jan 2026 17:40:00 -0700</pubDate>
+      <guid>http://localhost:1313/sprints/learning-laravel/day-13-the-flu-and-a-pivot/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;p&gt;I had hoped to be a lot furhter along by now, but I ended up getting the flu on Saturday, slept most of the day Sunday and Monday, and I&amp;rsquo;m just now feeling like getting out of bed and doing stuff again so here&amp;rsquo;s day 13 three days late.&lt;/p&gt;
+&lt;p&gt;I made a pivot from sqlite to postgres so I can verify things work when I get ready to publish to cloud.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Day 11: Site Navigation</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-11-site-navigation/</link>
@@ -26,21 +66,33 @@
 &lt;p&gt;After I got everything set back up I was able to get to work on my day 11 objectives starting with updating the Tenant Controller to get a list of all sibling pages.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Day 11: Site Navigation</title>
+      <title>Day 12: Improving Site Templates</title>
       <link>http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/</link>
       <pubDate>Thu, 22 Jan 2026 19:40:00 -0700</pubDate>
       <guid>http://localhost:1313/sprints/learning-laravel/day-12-improving-site-templates/</guid>
       <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;p&gt;For Day 11 my goal is to get dynamic navigation working for the pages on a site.&lt;/p&gt;
+&lt;p&gt;For Day 12 my goal is to improve the template for pages to be more brandable.&lt;/p&gt;
 &lt;p&gt;Today&amp;rsquo;s Definition of Done:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Links dynmically created for page&lt;/li&gt;
-&lt;li&gt;Routing between pages works&lt;/li&gt;
-&lt;li&gt;Active link is a different color&lt;/li&gt;
+&lt;li&gt;Add hero_title, hero_subtitle, cta_text, and business_phone to the sites table&lt;/li&gt;
+&lt;li&gt;Add a section in the dashboard to manage the new fields&lt;/li&gt;
+&lt;li&gt;Add a &amp;ldquo;Hero&amp;rdquo; area on the home page&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;work-session&#34;&gt;Work Session&lt;/h3&gt;
-&lt;p&gt;I reinstalled my PC yesterday so I spent a lot of time today getting my PC set back up with the dev environments for both RhizomeCMS and my Hugo Site.&lt;/p&gt;
-&lt;p&gt;After I got everything set back up I was able to get to work on my day 11 objectives starting with updating the Tenant Controller to get a list of all sibling pages.&lt;/p&gt;</description>
+&lt;p&gt;Since I am changing the database the first thing I had to do was a migration.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ php artisan make:migration add_brand_fields_to_sites_table
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   INFO  Migration &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;database/migrations/2026_01_24_021927_add_brand_fields_to_sites_table.php&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt; created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Then I created all the of the fields in the migration file&lt;/p&gt;</description>
     </item>
     <item>
       <title>Day 10: Page Editing</title>
